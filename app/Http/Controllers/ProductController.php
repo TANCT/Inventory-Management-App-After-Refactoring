@@ -38,6 +38,8 @@ class ProductController extends Controller
             $this->setIsClearance($product);
         }
 
+        // return response()->json($products->items());
+
         return view('products.index', compact('products'))
             ->with(request()->input('page'));
     }
@@ -55,8 +57,6 @@ class ProductController extends Controller
     {
         $product->isClearance = $product->discount >= 50;
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -88,9 +88,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('products.edit',compact('product'));
-    }
-
-    
+    }   
 
 /**
      * Update the specified resource in storage.
@@ -114,16 +112,17 @@ public function update(Request $request, Product $product)
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-public function store(Request $request)
-{
-    $this->validateRequest($request);
+*/
+    public function store(Request $request)
+    {
+        $this->validateRequest($request);
+    
+        Product::create($request->all());
+    
+        return redirect()->route('products.index')
+                        ->with('success', 'Product created successfully.');
+    }
 
-    Product::create($request->all());
-
-    return redirect()->route('products.index')
-                    ->with('success', 'Product created successfully.');
-}
 
 
     /**
@@ -139,6 +138,17 @@ public function store(Request $request)
         return redirect()->route('products.index')
                         ->with('success','Product deleted successfully');
     }
+    // public function destroy($productid)
+    // {
+    //     try {
+    //         $product = Product::findOrFail($productid);
+    //         $product->delete();
+
+    //         return response()->json(['message' => 'Product deleted successfully'], 200);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['message' => 'Failed to delete the product', 'error' => $e->getMessage()], 500);
+    //     }
+    // }
 
      /**
      * Dispose the specified resource
@@ -156,4 +166,52 @@ public function store(Request $request)
     return redirect()->route('products.index')
                     ->with('success', 'Product disposed successfully');
 }
+
+
+
+
+// /**
+//  * Store a newly created resource in storage.
+//  *
+//  * @param  \Illuminate\Http\Request  $request
+//  * @return \Illuminate\Http\Response
+//  */
+// public function storeProduct(Request $request)
+// {
+//     try {
+//         $this->validateRequest($request);
+
+//         Product::create($request->all());
+
+//         return response()->json(['message' => 'Successfully created'], 201);
+//     } catch (\Exception $e) {
+//         return response()->json(['message' => 'Failed to create the product', 'error' => $e->getMessage()], 500);
+//     }
+// }
+
+public function createProduct(Request $request)
+{
+    try {
+        $this->validateRequest($request);
+
+        $product = Product::create($request->all());
+
+        return response()->json(['message' => 'Product created', 'product' => $product], 201);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Failed to create the product', 'error' => $e->getMessage()], 500);
+    }
+}
+
+public function dump($productid)
+    {
+        try {
+            $product = Product::findOrFail($productid);
+            $product->delete();
+
+            return response()->json(['message' => 'Product deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to delete the product', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
 }

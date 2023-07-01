@@ -28,7 +28,32 @@ Route::resource('staffs', StaffController::class);
 Route::resource('disposedproducts',DisposedController::class);
 Route::group(['middleware' => ['web']], function () {
     Route::put('/products/{product}/dispose', [ProductController::class, 'dispose'])->name('products.dispose');
-    
 });
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Route::get('/products', [ProductController::class, 'index']);
+
+// Route::get('/staffs', [ProductController::class, 'index']);
+
+
+
+ // Route::post('/products/create', [ProductController::class, 'storeProduct'])->name('products.storeProduct');
+    // Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');
+    // Route::put('/merchandisers/{merchandiser}/update', [MerchandiserController::class, 'merchandiser'])->name('merchandisers.update');
+    // Route::put('/staffs/{staff}/update', [StaffController::class, 'staff'])->name('staffs.update');
+    // Route::put('/orders/{order}/update', [OrderController::class, 'order'])->name('orders.update');
+    // Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    // Route::post('/merchandisers', [MerchandiserController::class, 'store'])->name('merchandisers.store');
+    // Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    // Route::post('/staffs', [StaffController::class, 'store'])->name('staffs.store');
+    // Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    // Route::delete('/merchandisers/{merchandiser}', [MerchandiserController::class, 'destroy'])->name('merchandisers.destroy');
+    // Route::delete('/staffs/{staff}', [StaffController::class, 'destroy'])->name('staffs.destroy');
+    // Route::delete('/orders/{orders}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
 
 

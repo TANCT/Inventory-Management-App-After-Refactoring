@@ -25,5 +25,17 @@ class DisposedController extends ProductController{
             ->with(request()->input('page'));
     }
 
+    // public function destroy($productid)
+    // {
+    //     try {
+    //         $product = Product::findOrFail($productid);
+    //         $product->delete();
+
+    //         return response()->json(['message' => 'Product deleted successfully'], 200);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['message' => 'Failed to delete the product', 'error' => $e->getMessage()], 500);
+    //     }
+    // }
+
     
 }

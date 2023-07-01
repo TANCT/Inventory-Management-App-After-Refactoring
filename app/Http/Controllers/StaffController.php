@@ -29,6 +29,8 @@ class StaffController extends Controller
 
         $staffs = Staff::latest()->paginate(5);
 
+        // return response()->json($staffs->items());
+
         return view('staffs.index')->with('staffs', $staffs);
     }
 
@@ -110,4 +112,15 @@ class StaffController extends Controller
         return redirect()->route('staffs.index')
                         ->with('success','Staff deleted successfully');
     }
+
+//     /**
+//      * Display a listing of the resource.
+//      *
+//      * @return \Illuminate\Http\Response
+//      */
+// public function viewStaffs()
+// {
+//     $staffs = Staff::all();
+//     return response()->json($staffs);
+// }
 }
